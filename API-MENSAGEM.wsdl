@@ -1,0 +1,125 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mensagem.ws.cnseg.org.br/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MENSAGEM" targetNamespace="http://mensagem.ws.cnseg.org.br/">
+<types>
+<xs:schema xmlns:tns="http://mensagem.ws.cnseg.org.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mensagem.ws.cnseg.org.br/" version="1.0">
+<xs:element name="enviaEmail" type="tns:enviaEmail"/>
+<xs:element name="enviaEmailResponse" type="tns:enviaEmailResponse"/>
+<xs:element name="enviaSms" type="tns:enviaSms"/>
+<xs:element name="enviaSmsResponse" type="tns:enviaSmsResponse"/>
+<xs:element name="verificaStatusMsg" type="tns:verificaStatusMsg"/>
+<xs:element name="verificaStatusMsgResponse" type="tns:verificaStatusMsgResponse"/>
+<xs:complexType name="enviaEmail">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="senha" type="xs:string"/>
+<xs:element minOccurs="0" name="codigoServico" type="xs:string"/>
+<xs:element minOccurs="0" name="codigoEnvio" type="xs:string"/>
+<xs:element minOccurs="0" name="to" type="xs:string"/>
+<xs:element minOccurs="0" name="assunto" type="xs:string"/>
+<xs:element minOccurs="0" name="textoMensagem" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="enviaEmailResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="enviaEmailResult" type="xs:anyType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="verificaStatusMsg">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="senha" type="xs:string"/>
+<xs:element minOccurs="0" name="codigoServico" type="xs:string"/>
+<xs:element minOccurs="0" name="codigoEnvio" type="xs:string"/>
+<xs:element minOccurs="0" name="protocolo" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="verificaStatusMsgResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="verificaStatusMsgResult" type="xs:anyType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="enviaSms">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="senha" type="xs:string"/>
+<xs:element minOccurs="0" name="codigoServico" type="xs:string"/>
+<xs:element minOccurs="0" name="codigoEnvio" type="xs:string"/>
+<xs:element minOccurs="0" name="ddd" type="xs:string"/>
+<xs:element minOccurs="0" name="telefone" type="xs:string"/>
+<xs:element minOccurs="0" name="textoMensagem" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="enviaSmsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="enviaSmsResult" type="xs:anyType"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</types>
+<message name="mensagemWS_verificaStatusMsgResponse">
+<part element="tns:verificaStatusMsgResponse" name="verificaStatusMsgResponse"/>
+</message>
+<message name="mensagemWS_enviaSmsResponse">
+<part element="tns:enviaSmsResponse" name="enviaSmsResponse"/>
+</message>
+<message name="mensagemWS_enviaEmail">
+<part element="tns:enviaEmail" name="enviaEmail"/>
+</message>
+<message name="mensagemWS_enviaSms">
+<part element="tns:enviaSms" name="enviaSms"/>
+</message>
+<message name="mensagemWS_enviaEmailResponse">
+<part element="tns:enviaEmailResponse" name="enviaEmailResponse"/>
+</message>
+<message name="mensagemWS_verificaStatusMsg">
+<part element="tns:verificaStatusMsg" name="verificaStatusMsg"/>
+</message>
+<portType name="mensagemWS">
+<operation name="enviaEmail" parameterOrder="enviaEmail">
+<input message="tns:mensagemWS_enviaEmail"/>
+<output message="tns:mensagemWS_enviaEmailResponse"/>
+</operation>
+<operation name="enviaSms" parameterOrder="enviaSms">
+<input message="tns:mensagemWS_enviaSms"/>
+<output message="tns:mensagemWS_enviaSmsResponse"/>
+</operation>
+<operation name="verificaStatusMsg" parameterOrder="verificaStatusMsg">
+<input message="tns:mensagemWS_verificaStatusMsg"/>
+<output message="tns:mensagemWS_verificaStatusMsgResponse"/>
+</operation>
+</portType>
+<binding name="mensagemWSBinding" type="tns:mensagemWS">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="enviaEmail">
+<soap:operation soapAction="http://api-hmlg.cnseg.org.br/mensagemproxy/1.0.1"/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="enviaSms">
+<soap:operation soapAction="http://api-hmlg.cnseg.org.br/mensagemproxy/1.0.1"/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="verificaStatusMsg">
+<soap:operation soapAction="http://api-hmlg.cnseg.org.br/mensagemproxy/1.0.1"/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="MENSAGEM">
+<port binding="tns:mensagemWSBinding" name="mensagemWSPort">
+<soap:address location="http://api-hmlg.cnseg.org.br/mensagemproxy/1.0.1"/>
+</port>
+</service>
+</definitions>
